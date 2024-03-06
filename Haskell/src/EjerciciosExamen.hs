@@ -53,21 +53,21 @@ instance Ord Calzado where
         | otherwise = GT
 
 --datos de ejemplo
-bota1 :: Botas
-bota1 = (Botas "Fosco" 38)
-zapatilla1 :: Zapatillas
-zapatilla1 = (Zapatillas "Adidas" 40 "Running")
-bota2 :: Botas
-bota2 = (Botas "Diesel" 42)
-zapatilla2 :: Zapatillas
-zapatilla2 = (Zapatillas "Adidas" 40 "Running")
-bota3 :: Botas
-bota3 = (Botas "Martinelli" 40)
-zapatilla3 :: Zapatillas
-zapatilla3 = (Zapatillas "Nike" 32 "Padel")
+bota1 :: Calzado
+bota1 = Bota (Botas "Fosco" 38)
+zapatilla1 :: Calzado
+zapatilla1 = Zapatilla (Zapatillas "Adidas" 40 "Running")
+bota2 :: Calzado
+bota2 = Bota (Botas "Diesel" 42)
+zapatilla2 :: Calzado
+zapatilla2 = Zapatilla (Zapatillas "Adidas" 40 "Running")
+bota3 :: Calzado
+bota3 = Bota (Botas "Martinelli" 40)
+zapatilla3 :: Calzado
+zapatilla3 = Zapatilla (Zapatillas "Nike" 32 "Padel")
 
 productos :: [Calzado]
-productos = [(Bota bota1),(Zapatilla zapatilla1),(Bota bota2),(Zapatilla zapatilla2),(Bota bota3),(Zapatilla zapatilla3)]
+productos = [bota1,zapatilla2,bota2,zapatilla2,bota3,zapatilla3]
 
 order :: Ord a => [a] -> [a]
 order [] = []
