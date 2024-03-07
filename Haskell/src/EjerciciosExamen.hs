@@ -14,7 +14,9 @@ module EjerciciosExamen
         insertarEnArbol,
         f,
         separarPorPosicion,
-        p
+        p,
+        getCompatibles,
+        isCompatible
         ) where
 
 pertenece :: (Eq a) => a -> [a] -> Bool
@@ -128,7 +130,14 @@ getMajor v = major v
 getMinor :: Version -> Int
 getMinor v = minor v
 
--- No puedo hacer ni el c ni el d de momento del listado 2 de examenes
+class Compatible a where
+    isCompatible :: a -> a -> Bool
+
+instance Compatible Libreria where
+    isCompatible lib1 lib2 = nombre lib1 == nombre lib2 && getMajor (version lib1) == getMajor(version lib2)
+
+getCompatibles :: [Libreria] -> Libreria -> [Libreria]
+getCompatibles list lib = [x | x <- list, isCompatible x lib]
 
 --ABB
 data Arbol a = AV | Rama (Arbol a) a (Arbol a) deriving Show

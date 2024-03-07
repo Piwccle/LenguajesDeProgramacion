@@ -19,7 +19,13 @@ module Listado3Tema5
         insertarMesaLibre,
         quitarMesa,
         encontrarMesaLibre,
-        ocuparMesa
+        ocuparMesa,
+        esVacia,
+        primero,
+        insertar,
+        size,
+        eliminar,
+        ee1
         ) where
 
 data Fecha = Fecha {dia :: Int, mes :: Int, año :: Int}
@@ -43,11 +49,15 @@ qksort (p:xs) = qksort [x | x <- xs, x < p] ++ [p] ++ qksort [x | x <- xs, x >= 
 divisiones :: (Eq a, Integral a) => a -> [a] -> [Maybe a]
 divisiones n list = [if x == 0 then Nothing else Just (n`div`x) | x <- list]
 
-data Titulacion = GradoII | GradoADE_II | GradoADE deriving Show
+data Titulacion = GradoII | GradoADE_II | GradoADE deriving (Show, Eq)
 
 data Estudiante = Estudiante String Titulacion
+
 instance Show Estudiante where
     show (Estudiante n t) = "(" ++ n ++ show t ++ ")"
+
+instance Eq Estudiante where
+    (Estudiante nombre1 titulacion1) == (Estudiante nombre2 titulacion2) = nombre1 == nombre2 && titulacion1 == titulacion2
 
 a1 :: Estudiante
 a1 = Estudiante "Carlos Calle" GradoADE_II
@@ -105,7 +115,30 @@ ordenar lista = ordenarAux lista []
 qs :: [Fecha] -> [Fecha]
 qs lista = qksort lista
 
---Falta 6 porque no se crear clases aun
+class Coleccion c where
+    esVacia :: c a -> Bool
+    insertar :: a -> c a -> c a
+    primero :: c a -> a
+    eliminar :: c a -> c a
+    size :: c a -> Int
+
+data Pila a = Pil [a] deriving Show
+data Cola a = Col [a] deriving Show
+
+instance Coleccion Pila where
+    esVacia (Pil list) = length list == 0
+    insertar num (Pil list) = (Pil (list++[num]))
+    primero (Pil list) = last list
+    eliminar (Pil list) = (Pil (init list))
+    size (Pil list) = length list
+
+
+instance Coleccion Cola where
+    esVacia (Col list) = length list == 0
+    insertar num (Col list) = (Col (list++[num]))
+    primero (Col list) = head list
+    eliminar (Col list) = (Col (tail list))
+    size (Col list) = length list
 
 data Torneo = Torneo {nombre :: String, finalistas :: (String, String), resultado :: ([Int], [Int])} 
 
@@ -142,6 +175,9 @@ mostrarListadoOrdenadoTorneos :: [Torneo] -> String
 mostrarListadoOrdenadoTorneos list = ordenarListaYMostrar (qksort list)
 
 data Student = Student {fullname :: String, age :: Integer, qualifications :: [Integer]}
+
+ee1 :: Student
+ee1 = (Student "Sergio" 21 [1,2,3,4,5,6])
 
 instance Eq Student where
     s1 == s2 = fullname s1 == fullname s2 && age s1 == age s2 && qualifications s1 == qualifications s2
