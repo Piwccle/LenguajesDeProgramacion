@@ -241,6 +241,15 @@ ocuparMesa :: Ocupacion -> NumeroComensales -> Ocupacion
 ocuparMesa o1 num = (Ocupacion (quitarMesa (libres o1) mesa) (insertarEnMesa (ocupadas o1) mesa))
     where mesa = encontrarMesaLibre (libres o1) num
 
---No puedo hacer el 10 hasta el miercoles
---Ni el 11
---Ni el 12
+class Joinable c where
+    join :: c a -> c a -> c a
+
+instance Joinable [] where
+    join l1 l2 = l1++l2
+
+data Arbol a = AV | Rama (Arbol a) a (Arbol a) deriving Show
+
+instance Joinable Arbol where
+    join AV arbol = arbol
+    join arbol AV = arbol
+    join (Rama izq n der) arbol = Rama (join izq arbol) n der
