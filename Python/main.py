@@ -1,7 +1,6 @@
-# This is a sample Python script.
-
-# Press Mayús+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+import add_three
+import math
+import random
 
 
 def print_hi(name):
@@ -13,4 +12,18 @@ def print_hi(name):
 if __name__ == '__main__':
     print_hi('PyCharm')
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+print(add_three.add_three(4))
+
+building_id = 12
+building_name = "URJC-Library"
+lat = 40.337088
+lon = -3.875840
+# f-string format
+building_info = f'Building {building_id :04}. Name: {building_name}. GPS: {lat :.4f}, {lon :.4f}.'
+print(building_info)
+# printf style string formatting
+building_info = 'Building %04d. Name: %s. GPS: %.4f, %.4f.' % (building_id, building_name, lat, lon)
+print(building_info)
+# printf style string formatting
+building_info = 'Building %(id)04d. Name: %(name)s. GPS: %(lat).4f, %(lon).4f.' %{"id": building_id, "name": building_name, "lat": lat, "lon": lon}
+print(building_info)
