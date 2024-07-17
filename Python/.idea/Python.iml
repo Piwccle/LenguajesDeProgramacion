@@ -5,4 +5,19 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
+  <component name="TemplatesService">
+    <option name="templateFileTypes">
+      <list>
+        <option value="HTML" />
+        <option value="Requirements.txt" />
+        <option value="XHTML" />
+        <option value="XML" />
+      </list>
+    </option>
+    <option name="TEMPLATE_FOLDERS">
+      <list>
+        <option value="$MODULE_DIR$/ficheros" />
+      </list>
+    </option>
+  </component>
 </module>
